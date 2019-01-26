@@ -1,0 +1,104 @@
+{
+    "engines": {
+        "composer": "^0.20.0"
+    },
+    "name": "passbase-de-network",
+    "version": "0.0.1",
+    "description": "The Composer private document sharing prototype",
+    "networkImage": "https://hyperledger.github.io/composer-sample-networks/packages/basic-sample-network/networkimage.svg",
+    "networkImageanimated": "https://hyperledger.github.io/composer-sample-networks/packages/basic-sample-network/networkimageanimated.svg",
+    "scripts": {
+        "prepare":" composer card create -p connection.json -u PeerAdmin -c Admin@org1.example.com-cert.pem -k 114aab0e76bf0c78308f89efc4b8c9423e31568da0c340ca187a9b17aa9a4457_sk -r PeerAdmin -r ChannelAdmin && composer card import -f PeerAdmin@passbase-d-network.card",
+        "prepublish": "composer archive create --sourceType dir --sourceName . -a ./passbase-d-network@$npm_package_version.bna",
+        "pretest": "npm run lint",
+        "start": "composer network install -c PeerAdmin@passbase-d-network -a passbase-d-network@$npm_package_version.bna && composer network start --networkName passbase-d-network --networkVersion $npm_package_version -A admin -S adminpw -c PeerAdmin@passbase-d-network",
+        "upgrade": "composer network install -c PeerAdmin@passbase-d-network -a passbase-d-network@$npm_package_version.bna && composer network upgrade -c PeerAdmin@passbase-d-network --networkName passbase-d-network-V $npm_package_version",
+        "lint": "eslint .",
+        "rest":" composer-rest-server -c admin@passbase-d-network -n always -w true",
+        "playground":"composer-playground",
+        "postlint": "npm run licchk",
+        "licchk": "license-check-and-add",
+        "postlicchk": "npm run doc",
+        "doc": "jsdoc --pedantic --recurse -c jsdoc.json",
+        "test-inner": "mocha -t 0 --recursive && cucumber-js",
+        "test-cover": "nyc npm run test-inner",
+        "test": "npm run test-inner"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/HookToSky/composer-docSharing-demo.git"
+    },
+    "keywords": [
+        "passbase",
+        "composer",
+        "composer-network"
+    ],
+    "author": "Hyperledger Composer",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-as-promised": "^6.0.0",
+        "composer-admin": "^0.20.0-0",
+        "composer-cli": "^0.20.0-0",
+        "composer-client": "^0.20.0-0",
+        "composer-connector-embedded": "^0.20.0-0",
+        "composer-cucumber-steps": "^0.20.0-0",
+        "cucumber": "^2.2.0",
+        "eslint": "^3.6.1",
+        "istanbul": "^0.4.5",
+        "jsdoc": "^3.5.5",
+        "license-check-and-add": "~2.3.0",
+        "mkdirp": "^0.5.1",
+        "mocha": "^3.2.0",
+        "moment": "^2.17.1",
+        "nyc": "^11.0.2"
+    },
+    "license-check-and-add-config": {
+        "folder": ".",
+        "license": "LICENSE.txt",
+        "exact_paths_method": "EXCLUDE",
+        "exact_paths": [
+            "composer-logs",
+            "dist",
+            "features",
+            "node_modules",
+            "out",
+            ".git"
+        ],
+        "file_type_method": "EXCLUDE",
+        "file_types": [
+            ".yml"
+        ],
+        "insert_license": false,
+        "license_formats": {
+            "js|cto|acl": {
+                "prepend": "/*",
+                "append": " */",
+                "eachLine": {
+                    "prepend": " * "
+                }
+            },
+            "md": {
+                "file": "../../markdown-license.txt"
+            }
+        }
+    },
+    "nyc": {
+        "exclude": [
+            "coverage/**",
+            "features/**",
+            "out/**",
+            "test/**"
+        ],
+        "reporter": [
+            "text-summary",
+            "html"
+        ],
+        "all": true,
+        "check-coverage": true,
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+    }
+}

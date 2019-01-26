@@ -1,0 +1,55 @@
+
+
+/**
+ * Access Control Permissions.
+ */
+
+rule AuthorizeAccessTransactions {
+    description: "Allow all users to authorize access transactions"
+    participant: "org.example.prototype.User"
+    operation: CREATE
+    resource: "org.example.prototype.AuthorizeRequest"
+    action: ALLOW
+}
+
+rule RevokeAccessTransactions {
+    description: "Allow all users to revoke access transactions"
+    participant: "org.example.prototype.User"
+    operation: CREATE
+    resource: "org.example.prototype.RevokeRequest"
+    action: ALLOW
+}
+
+rule OwnerHasFullAccessToTheirAssets {
+    description: "Allow all participants full access to their assets"
+    participant(p): "org.example.prototype.User"
+    operation: ALL
+    resource(r): "org.example.prototype.Document"
+    condition: (r.owner.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule ForeignRecordConditionalAccess {
+    description: "Allow participants access to other people's records if granted"
+    participant(p): "org.example.prototype.Requestor"
+    operation: READ
+    resource(r): "org.example.prototype.Document"
+    condition: (r.requestors && r.requestors.indexOf(p.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}

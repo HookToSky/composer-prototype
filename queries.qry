@@ -1,0 +1,9 @@
+/** Sample query
+*/
+query selectDocumentsbyOwner {
+  description: "Select all documents based on their owner"
+  statement:
+      SELECT org.example.prototype.Document
+          WHERE (ownerId == _$ownerId)
+}
+

@@ -1,0 +1,39 @@
+
+/**
+ * Passbase business network definition.
+ */
+namespace org.example.prototype
+
+asset Document identified by docId {
+  o String docId
+  o String ownerId
+  o String hashId
+  o String[] requestor
+}
+participant Requestor identified by requestorId {
+  o String requestorId
+  o String companyName
+  o String address
+}
+participant User identified by userId {
+  o String userId
+  o String firstName
+  o String lastName
+  --> Document[] documents
+}
+transaction AddDocument {
+  o String hashId
+  o String ownerId
+  o String docId
+}
+transaction AuthorizeRequest {
+  o String ownerId
+  --> Document doc
+  o String requestorId
+}
+transaction RevokeRequest {
+   o String ownerId
+  --> Document doc
+  o String requestorId
+}
+
