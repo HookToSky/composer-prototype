@@ -112,7 +112,7 @@ Type these commands for initial setup;
   4) npm upgrade: Upgrades the chaincode.
   After installing/starting the chaincode;
 
-  5) npm run playground: Opens playground tool to test the chaincode with the beautiful simple UI. `localhost:8080` (Note: After opening in the browser, please import admin card from the repo e.g admin@passbase-de-network.card then click connect!)
+  5) npm run playground: Opens playground tool to test the chaincode with the beautiful simple UI. `localhost:8080` (Note: After opening in the browser, please import admin card from the repo e.g admin@passbase-net.card then click connect!)
 
   6) npm run rest: Opens rest server interface at `localhost:3000/explorer/#`you should use this after starting the network
 
@@ -124,9 +124,9 @@ Inside ~/fabric-dev-server folder.
 ./tearDownFabric.sh
 
 ## To delete cards
-composer card delete -c PeerAdmin@passbase-de-network
+composer card delete -c PeerAdmin@passbase-net
 
-composer card delete -c admin@passbase-de-network
+composer card delete -c admin@passbase-net
 
 If these commands fail, then you have network cards from a previous version and you will have to delete the file system card store.
 

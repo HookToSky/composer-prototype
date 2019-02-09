@@ -2,19 +2,19 @@
     "engines": {
         "composer": "^0.20.0"
     },
-    "name": "passbase-de-network",
+    "name": "passbase-net",
     "version": "0.0.1",
     "description": "The Composer private document sharing prototype",
     "networkImage": "https://hyperledger.github.io/composer-sample-networks/packages/basic-sample-network/networkimage.svg",
     "networkImageanimated": "https://hyperledger.github.io/composer-sample-networks/packages/basic-sample-network/networkimageanimated.svg",
     "scripts": {
-        "prepare":" composer card create -p connection.json -u PeerAdmin -c Admin@org1.example.com-cert.pem -k 114aab0e76bf0c78308f89efc4b8c9423e31568da0c340ca187a9b17aa9a4457_sk -r PeerAdmin -r ChannelAdmin && composer card import -f PeerAdmin@passbase-d-network.card",
-        "prepublish": "composer archive create --sourceType dir --sourceName . -a ./passbase-d-network@$npm_package_version.bna",
+        "prepare":" composer card create -p connection.json -u PeerAdmin -c Admin@org1.example.com-cert.pem -k 114aab0e76bf0c78308f89efc4b8c9423e31568da0c340ca187a9b17aa9a4457_sk -r PeerAdmin -r ChannelAdmin && composer card import -f PeerAdmin@passbase-net.card",
+        "prepublish": "composer archive create --sourceType dir --sourceName . -a ./passbase-net@$npm_package_version.bna",
         "pretest": "npm run lint",
-        "start": "composer network install -c PeerAdmin@passbase-d-network -a passbase-d-network@$npm_package_version.bna && composer network start --networkName passbase-d-network --networkVersion $npm_package_version -A admin -S adminpw -c PeerAdmin@passbase-d-network",
-        "upgrade": "composer network install -c PeerAdmin@passbase-d-network -a passbase-d-network@$npm_package_version.bna && composer network upgrade -c PeerAdmin@passbase-d-network --networkName passbase-d-network-V $npm_package_version",
+        "start": "composer network install -c PeerAdmin@passbase-net -a passbase-net@$npm_package_version.bna && composer network start --networkName passbase-net --networkVersion $npm_package_version -A admin -S adminpw -c PeerAdmin@passbase-net",
+        "upgrade": "composer network install -c PeerAdmin@passbase-net -a passbase-net@$npm_package_version.bna && composer network upgrade -c PeerAdmin@passbase-net --networkName passbase-net-V $npm_package_version",
         "lint": "eslint .",
-        "rest":" composer-rest-server -c admin@passbase-d-network -n always -w true",
+        "rest":" composer-rest-server -c admin@passbase-net -n always -w true",
         "playground":"composer-playground",
         "postlint": "npm run licchk",
         "licchk": "license-check-and-add",
@@ -29,7 +29,7 @@
         "url": "https://github.com/HookToSky/composer-docSharing-demo.git"
     },
     "keywords": [
-        "passbase",
+        "passbase-net",
         "composer",
         "composer-network"
     ],

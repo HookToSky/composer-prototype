@@ -1,6 +1,6 @@
 
 /**
- * Passbase business network definition.
+ * passbase-net business network definition.
  */
 namespace org.example.prototype
 
